@@ -1,2 +1,3 @@
 # Intelligent-interrogation
-keep calm and keep coding
+
+This is an app to give drug advise to user based on sympotm.
