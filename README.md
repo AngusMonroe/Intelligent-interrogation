@@ -27,5 +27,3 @@ The main function of the project is as follows:
 - python 3.6
 - PyQt5
 - urllib, urllib2, json, pymssql, word2vec, Levenshtein, jieba, jieba.analyse, xlrd, xlwt
-
-
