@@ -5,9 +5,9 @@ import pymssql
 
 class MSSQL:
     def __init__(self,host,user,pwd,db):
-        self.host = "47.94.12.243"
+        self.host = "47.94.12.***"
         self.user = "sa"
-        self.pwd = "Jiuyi8899"
+        self.pwd = "******"
         self.db = "Database"
 
     def __GetConnect(self):
