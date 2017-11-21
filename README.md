@@ -20,6 +20,7 @@ The main function of the project is as follows:
 - use TF-IDF to extract keywords
 - use Word2vec to build model
 - use Levenshtein to searching targets
+- use Seq2seq model
 
 
 
