@@ -1,5 +1,5 @@
 # Intelligent-interrogation
-This is an app to give drug advise to user based on his sympotm.
+This is an app to give drug advise to user based on his symptom.
 
 This project conclude two parts: **Word2vec** and **Web spider**. 
 
