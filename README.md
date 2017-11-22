@@ -5,7 +5,7 @@ This project conclude two parts: **Word2vec** and **Web spider**.
 
 
 ### Directory Introduction
-- **Intelligent-interrogation** directory contains python code and C code about the project demo
+- **Intelligent-interrogation** directory contains python code and C++ code about the project demo
 - **data** directory contains training sets and database(disease information, disease dictionary and drug dictionary)
 - **debug** directory contains some python code used to debug or processing data(divide words or adjust data format)
 - **spider** directory contains web spiders used to get information online
