@@ -1,11 +1,11 @@
 # Intelligent-interrogation
-This is an app to give drug advise to user based on sympotm.
+This is an app to give drug advise to user based on his symptom.
 
 This project conclude two parts: **Word2vec** and **Web spider**. 
 
 
 ### Directory Introduction
-- **Intelligent-interrogation** directory contains python code about the project demo
+- **Intelligent-interrogation** directory contains python code and C++ code about the project demo
 - **data** directory contains training sets and database(disease information, disease dictionary and drug dictionary)
 - **debug** directory contains some python code used to debug or processing data(divide words or adjust data format)
 - **spider** directory contains web spiders used to get information online
@@ -20,6 +20,7 @@ The main function of the project is as follows:
 - use TF-IDF to extract keywords
 - use Word2vec to build model
 - use Levenshtein to searching targets
+- use Seq2seq model
 
 
 
