@@ -9,6 +9,7 @@ This project conclude two parts: **Word2vec** and **Web spider**.
 - **data** directory contains training sets and database(disease information, disease dictionary and drug dictionary)
 - **debug** directory contains some python code used to debug or processing data(divide words or adjust data format)
 - **spider** directory contains web spiders used to get information online
+- **paper** is the introduction of our project
 - **IMG_6579** is the framework of our project
 
 
