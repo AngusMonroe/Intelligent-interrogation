@@ -5,12 +5,15 @@ This project conclude two parts: **Word2vec** and **Web spider**.
 
 
 ### Directory Introduction
-- **Intelligent-interrogation** directory contains python code and C++ code about the project demo
-- **data** directory contains training sets and database(disease information, disease dictionary and drug dictionary)
-- **debug** directory contains some python code used to debug or processing data(divide words or adjust data format)
-- **spider** directory contains web spiders used to get information online
-- **paper** is the introduction of our project
-- **IMG_6579** is the framework of our project
+- **Intelligent-interrogation** directory contains python code and C++ code about the project demo.
+ - **pyQT** is the python code of project demo.
+ - **QT** is the C++ code of project GUI.
+ - **python-LDA** is a demo of LDA model in python.
+- **data** directory contains training sets and database(disease information, disease dictionary and drug dictionary).
+- **debug** directory contains some python code used to debug or processing data(divide words or adjust data format).
+- **spider** directory contains web spiders used to get information online.
+- **paper** is the introduction of our project.
+- **IMG_6579** is the framework of our project.
 
 
 ### Project Functions
@@ -22,6 +25,7 @@ The main function of the project is as follows:
 - use Word2vec to build model
 - use Levenshtein to searching targets
 - use Seq2seq model
+- use LDA model
 
 
 
