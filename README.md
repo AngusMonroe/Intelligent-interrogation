@@ -26,10 +26,12 @@ The main function of the project is as follows:
 - use Levenshtein to searching targets
 - use Seq2seq model
 - use LDA model
+- use SQL Sever
 
 
 
 ### Requirements
 - python 3.6
 - PyQt5
+- Navicat for SQL Sever
 - urllib, urllib2, json, pymssql, word2vec, Levenshtein, jieba, jieba.analyse, xlrd, xlwt
