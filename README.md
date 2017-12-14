@@ -13,7 +13,7 @@ This project conclude two parts: **Word2vec** and **Web spider**.
 - **debug** directory contains some python code used to debug or processing data(divide words or adjust data format).
 - **spider** directory contains web spiders used to get information online.
 - **paper** is the introduction of our project.
-- **IMG_8655** is the mind vector of our project.
+- **IMG_8671** is the mind vector of our project.
 
 
 ### Project Functions
