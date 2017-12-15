@@ -18,37 +18,7 @@ from PyQt5.QtWidgets import QApplication , QMainWindow, QPushButton, QDialog
 from PyQt5 import QtCore, QtGui, QtWidgets
 from answer_pyqt5 import *
 
-class MSSQL:
-    def __init__(self,host,user,pwd,db):
-        self.host = "47.94.**.***"
-        self.user = "sa"
-        self.pwd = "******"
-        self.db = "Database"
 
-    def __GetConnect(self):
-        if not self.db:
-            raise(NameError,"没有设置数据库信息")
-        self.conn = pymssql.connect(host=self.host,user=self.user,password=self.pwd,database=self.db,charset="utf8")
-        cur = self.conn.cursor()
-        if not cur:
-            raise(NameError,"连接数据库失败")
-        else:
-            return cur
-
-    def ExecQuery(self,sql):
-        cur = self.__GetConnect()
-        cur.execute(sql)
-        resList = cur.fetchall()
-
-        #查询完毕后必须关闭连接
-        self.conn.close()
-        return resList
-
-    def ExecNonQuery(self,sql):
-        cur = self.__GetConnect()
-        cur.execute(sql)
-        self.conn.commit()
-        self.conn.close()
 
 class Ui_MainWindow(object):
     def __init__(self):
@@ -96,20 +66,25 @@ class Ui_MainWindow(object):
         self.ans = "您的建议用药有：\n"
         txt = self.et_describe.toPlainText()
         jieba.load_userdict("/Users/xujiaxing/Downloads/jibingICD.txt")
-        txt_key = jieba.analyse.extract_tags(txt, topK=1, withWeight=False) #从输入中提取关键词
-        print(txt_key[0])
-        # word = list(jieba.cut(txt, cut_all=False))  # 精确模式
-        # for n in word:
-        #     with open(r'D:\xjxpython\jibingICD10.txt', 'r', encoding='utf8') as foo:
-        #         for line in foo.readlines():
-        #             if n in line and len(n) > 1
+        txt_key = jieba.analyse.extract_tags(txt, topK=2, withWeight=False) #从输入中提取关键词
         if txt_key:
-            key = [0 for x in range(0, 6)]
+            print(txt_key)
             model = word2vec.Word2Vec.load("/users/xujiaxing/downloads/ml.model")
-            y2 = model.most_similar(txt_key, topn=4)  #4个最相关的
-            print("和【%s】最相关的词有：\n"%txt_key[0])
+            if len(txt_key)>1:  #双关键词
+                print(model.similarity(txt_key[0], txt_key[1]))
+                if model.similarity(txt_key[0], txt_key[1])> 0.5:  #两关键词比较相近，使用两个关键词进行匹配
+                    y2 = model.most_similar(txt_key, topn=4)  # 4个最相关的
+                    print("和【%s】最相关的词有：\n" % txt_key)
+                else: #两关键词差距较大，只使用第一个关键词匹配
+                    y2 = model.most_similar(txt_key[0], topn=4)  # 4个最相关的
+                    print("和【%s】最相关的词有：\n" % txt_key[0])
+            else:  #单关键词
+                y2 = model.most_similar(txt_key[0], topn=4)  # 4个最相关的
+                print("和【%s】最相关的词有：\n" % txt_key[0])
+
+            key = [0 for x in range(0, 6)]
             i = 1
-            key[0] = txt
+            key[0] = txt_key[0]
             for item in y2:
                 print(item[0], item[1])
                 #name = item[0].encode("utf-8")
