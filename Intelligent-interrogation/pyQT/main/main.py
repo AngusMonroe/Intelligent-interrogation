@@ -3,8 +3,7 @@ __date__='2017.08.02'
 # -*- coding: utf-8 -*-
 
 import sys
-sys.path.remove('/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python')
-sys.path.append('/Users/xujiaxing/anaconda/lib/python3.6/site-packages')
+
 from PyQt5.QtWidgets import QApplication , QMainWindow, QPushButton
 from PyQt5 import QtCore, QtGui
 from main_pyqt5 import *
