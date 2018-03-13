@@ -12,7 +12,7 @@ from gensim.models import word2vec
 import logging
 
 if __name__ == '__main__':
-    model =word2vec.Word2Vec.load("/users/xujiaxing/downloads/ml.model")
+    model =word2vec.Word2Vec.load("../../../data/ml.model")
     print("wow")
 
     app = QApplication(sys.argv)

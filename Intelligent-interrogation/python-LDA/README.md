@@ -26,7 +26,6 @@ python-LDA
 ### 使用说明
 * 用分好词的文本替换掉`data/train.dat`,更详细文档路径查看`setting.conf`
 * cd 到lda.py所在目录，执行命令:python lda.py
-* lda.py 是python3代码，lda2.py是python2代码
 
 ---
         此为lda模型的基础版本，所有参数均由人为设定，更复杂的自动生成算法将在下个版本更新。

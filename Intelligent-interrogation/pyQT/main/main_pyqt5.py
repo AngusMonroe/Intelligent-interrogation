@@ -65,11 +65,11 @@ class Ui_MainWindow(object):
     def firstPyQt5_button_click(self):
         self.ans = "您的建议用药有：\n"
         txt = self.et_describe.toPlainText()
-        jieba.load_userdict("/Users/xujiaxing/Downloads/jibingICD.txt")
+        jieba.load_userdict("../../../data/jibingICD.txt")
         txt_key = jieba.analyse.extract_tags(txt, topK=2, withWeight=False) #从输入中提取关键词
         if txt_key:
             print(txt_key)
-            model = word2vec.Word2Vec.load("/users/xujiaxing/downloads/ml.model")
+            model = word2vec.Word2Vec.load("../../../data/ml.model")
             if len(txt_key)>1:  #双关键词
                 print(model.similarity(txt_key[0], txt_key[1]))
                 if model.similarity(txt_key[0], txt_key[1])> 0.5:  #两关键词比较相近，使用两个关键词进行匹配
@@ -92,7 +92,7 @@ class Ui_MainWindow(object):
                 #key.append((name,i))
                 i = i + 1
 
-            path = r'/users/xujiaxing/downloads/disease_information.xls'
+            path = r'/../../../data/disease_information.xls'
 
             #key[1] = u"肾性高血压"
             #key[2] = u"心功能不全"
