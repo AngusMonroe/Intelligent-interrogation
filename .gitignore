@@ -103,3 +103,5 @@ ENV/
 *.dat
 *.conf
 info*
+data/*
+data.txt
