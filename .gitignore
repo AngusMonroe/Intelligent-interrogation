@@ -105,3 +105,4 @@ ENV/
 info*
 data/*
 data.txt
+output.txt
