@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file '/Users/xujiaxing/Intelligent-interrogation/mainwindow.ui'
+# Form implementation generated from reading ui file 'mainwindow.ui'
 #
-# Created by: PyQt5 UI code generator 5.9
+# Created by: PyQt5 UI code generator 5.10.1
 #
 # WARNING! All changes made in this file will be lost!
-#encoding=utf-8
+
+from PyQt5 import QtCore, QtPrintSupport , QtWidgets, QtGui, QtWidgets
 from gensim.models import word2vec
 import pymssql
 import Levenshtein
@@ -14,15 +15,15 @@ import jieba.analyse
 import xlrd
 import xlwt
 import re
-from PyQt5.QtWidgets import QApplication , QMainWindow, QPushButton, QDialog
-from PyQt5 import QtCore, QtGui, QtWidgets
-from answer_pyqt5 import *
-
+from PyQt5.QtWidgets import QApplication , QMainWindow, QPushButton, QDialog, QWidget
+from answer import *
+from dialog import *
 
 
 class Ui_MainWindow(object):
+
     def __init__(self):
-        self.childwindow = QMainWindow()
+        self.childwindow = QtWidgets.QMainWindow()
         self.ans = "您的建议用药有：\n"
 
 
@@ -65,11 +66,12 @@ class Ui_MainWindow(object):
     def firstPyQt5_button_click(self):
         self.ans = "您的建议用药有：\n"
         txt = self.et_describe.toPlainText()
-        jieba.load_userdict("../../../data/jibingICD.txt")
-        txt_key = jieba.analyse.extract_tags(txt, topK=2, withWeight=False) #从输入中提取关键词
-        if txt_key:
+
+        if txt:
+            jieba.load_userdict("../../data/jibingICD.txt")
+            txt_key = jieba.analyse.extract_tags(txt, topK=2, withWeight=False)  # 从输入中提取关键词
             print(txt_key)
-            model = word2vec.Word2Vec.load("../../../data/ml.model")
+            model = word2vec.Word2Vec.load("../../data/ml.model")
             if len(txt_key)>1:  #双关键词
                 print(model.similarity(txt_key[0], txt_key[1]))
                 if model.similarity(txt_key[0], txt_key[1])> 0.5:  #两关键词比较相近，使用两个关键词进行匹配
@@ -92,7 +94,7 @@ class Ui_MainWindow(object):
                 #key.append((name,i))
                 i = i + 1
 
-            path = r'/../../../data/disease_information.xls'
+            path = r'../../data/disease_information.xls'
 
             #key[1] = u"肾性高血压"
             #key[2] = u"心功能不全"
@@ -125,8 +127,9 @@ class Ui_MainWindow(object):
             self.childwindow.show()
             print("test")
         else:
-            print("error")#TODO 弹出对话框
-
+            print("error")
+            Ui_Dialog().setupUi(self.childwindow)
+            self.childwindow.show()
 
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -160,7 +163,12 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "Intelligent Interrogation"))
-        self.et_describe.setHtml('')
+        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        self.et_describe.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:\'.SF NS Text\'; font-size:13pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
         self.bt_ok.setText(_translate("MainWindow", "OK"))
         self.label_title.setText(_translate("MainWindow", "请输入您的症状"))
+
