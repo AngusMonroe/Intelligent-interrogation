@@ -106,3 +106,4 @@ info*
 data/*
 data.txt
 output.txt
+!readme.md
