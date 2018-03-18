@@ -6,12 +6,13 @@
 #
 # WARNING! All changes made in this file will be lost!
 
-from PyQt5.QtWidgets import QApplication , QMainWindow, QPushButton
+from PyQt5.QtWidgets import QApplication , QMainWindow, QPushButton, QWidget
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtGui import QPalette,QPixmap,QFont
 from PyQt5.QtCore import Qt
+from mainwindow import *
 
-class Ui_Answer(object):
+class Ui_Answer(QWidget):
     def setupUi(self, Answer, ans):
         Answer.setObjectName("Answer")
         Answer.resize(400, 300)
@@ -30,8 +31,9 @@ class Ui_Answer(object):
         label1.setPalette(pe)
 
         self.retranslateUi(Answer)
-        self.pushButton.clicked.connect(self.pushButton.click)
-        self.pushButton.clicked.connect(self.pushButton.click)
+        self.pushButton.clicked.connect(self.close)
+
+        # self.pushButton.clicked.connect(self.pushButton.click)
         QtCore.QMetaObject.connectSlotsByName(Answer)
 
     def retranslateUi(self, Answer):

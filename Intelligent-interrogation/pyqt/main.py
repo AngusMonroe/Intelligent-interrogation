@@ -1,5 +1,5 @@
-__author__='XJX'
-__date__='2018.03.16'
+__author__ = 'XJX'
+__date__ = '2018.03.16'
 # -*- coding: utf-8 -*-
 
 import sys
@@ -12,7 +12,7 @@ import logging
 
 
 if __name__ == '__main__':
-    model =word2vec.Word2Vec.load("../../data/ml.model")
+    model = word2vec.Word2Vec.load("../../data/ml.model")
     print("wow")
 
     app = QApplication(sys.argv)

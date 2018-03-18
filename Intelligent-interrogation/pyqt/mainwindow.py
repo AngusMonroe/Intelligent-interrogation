@@ -15,15 +15,15 @@ import jieba.analyse
 import xlrd
 import xlwt
 import re
-from PyQt5.QtWidgets import QApplication , QMainWindow, QPushButton, QDialog, QWidget
+from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QDialog, QWidget, QMessageBox
 from answer import *
-from dialog import *
 
 
-class Ui_MainWindow(object):
+class Ui_MainWindow(QWidget):
 
-    def __init__(self):
-        self.childwindow = QtWidgets.QMainWindow()
+    def __init__(self, parent=None):
+        super(Ui_MainWindow, self).__init__(parent)
+        self.childwindow = Ui_Answer()
         self.ans = "您的建议用药有：\n"
 
 
@@ -61,7 +61,7 @@ class Ui_MainWindow(object):
             cell_value = sheet1.cell_value(ans[i][1], 2)
             self.ans += cell_value + '\n'
             print(cell_value)
-            #print(ans[i][1])
+            # print(ans[i][1])
 
     def firstPyQt5_button_click(self):
         self.ans = "您的建议用药有：\n"
@@ -72,15 +72,15 @@ class Ui_MainWindow(object):
             txt_key = jieba.analyse.extract_tags(txt, topK=2, withWeight=False)  # 从输入中提取关键词
             print(txt_key)
             model = word2vec.Word2Vec.load("../../data/ml.model")
-            if len(txt_key)>1:  #双关键词
+            if len(txt_key)>1:  # 双关键词
                 print(model.similarity(txt_key[0], txt_key[1]))
                 if model.similarity(txt_key[0], txt_key[1])> 0.5:  #两关键词比较相近，使用两个关键词进行匹配
                     y2 = model.most_similar(txt_key, topn=4)  # 4个最相关的
                     print("和【%s】最相关的词有：\n" % txt_key)
-                else: #两关键词差距较大，只使用第一个关键词匹配
+                else: # 关键词差距较大，只使用第一个关键词匹配
                     y2 = model.most_similar(txt_key[0], topn=4)  # 4个最相关的
                     print("和【%s】最相关的词有：\n" % txt_key[0])
-            else:  #单关键词
+            else:  # 单关键词
                 y2 = model.most_similar(txt_key[0], topn=4)  # 4个最相关的
                 print("和【%s】最相关的词有：\n" % txt_key[0])
 
@@ -89,18 +89,18 @@ class Ui_MainWindow(object):
             key[0] = txt_key[0]
             for item in y2:
                 print(item[0], item[1])
-                #name = item[0].encode("utf-8")
+                # name = item[0].encode("utf-8")
                 key[i] = item[0]
-                #key.append((name,i))
+                # key.append((name,i))
                 i = i + 1
 
             path = r'../../data/disease_information.xls'
 
-            #key[1] = u"肾性高血压"
-            #key[2] = u"心功能不全"
-            #key[3] = u"充血性心力衰竭"
-            #key[4] = u"高血压病"
-            #key[5] = u"高血脂"
+            # key[1] = u"肾性高血压"
+            # key[2] = u"心功能不全"
+            # key[3] = u"充血性心力衰竭"
+            # key[4] = u"高血压病"
+            # key[5] = u"高血脂"
             keys = [key[0], key[1], key[2], key[3], key[4]]
 
             weight1 = 2.0
@@ -119,17 +119,25 @@ class Ui_MainWindow(object):
 
             self.matchKeyWords(path, keys, keysWeight, colsWeight, ansNum)
 
-                #ms = MSSQL(host="47.94.12.243", user="sa", pwd="Jiuyi8899", db="Database")
-            #reslist = ms.ExecQuery("select 适应症 from data")
-            #for i in reslist:
-                #TODO 匹配算法
+            # ms = MSSQL(host="47.94.12.243", user="sa", pwd="Jiuyi8899", db="Database")
+            # reslist = ms.ExecQuery("select 适应症 from data")
+
             Ui_Answer().setupUi(self.childwindow,self.ans)
+            # self.hide()
             self.childwindow.show()
+            # if not self.childwindow.isVisible():
+            #     self.show()
             print("test")
+
         else:
             print("error")
-            Ui_Dialog().setupUi(self.childwindow)
-            self.childwindow.show()
+            self.on_help_mode_clicked()
+
+    def on_help_mode_clicked(self):
+        """
+        Slot documentation goes here.
+        """
+        QMessageBox.information(self, "Help", "请正确输入")  # 使用information信息框
 
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
