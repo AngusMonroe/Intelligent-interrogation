@@ -3,7 +3,7 @@ __date__ = '2018.03.16'
 # -*- coding: utf-8 -*-
 
 import sys
-from PyQt5.QtWidgets import QApplication , QMainWindow, QPushButton
+from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton
 from PyQt5 import QtCore, QtGui
 from mainwindow import *
 from answer import *

@@ -1,19 +1,17 @@
-# -*- coding:utf-8 -*-
+#-*- coding:gbk -*-
 __author__ = 'XJX'
 __date__ = '2018.03.19'
 
 
 """
 description:
-    å°†ä¸€ä¸ªç›®å½•ä¸‹æ‰€æœ‰æ–‡ä»¶ä¸­çš„'&quot'å’Œ'&nbsp;'åˆ é™¤
-    è¯¥ç›®å½•ä¸‹åˆ›å»ºä¸€ä¸ªæ–°ç›®å½•newdir
-    æ–°ç›®å½•ä¸‹fileNames.txtåˆ›å»ºä¸€ä¸ªæ–‡æœ¬å­˜å…¥æ‰€æœ‰çš„wordæ–‡ä»¶å
-    æœ¬ç‰ˆæœ¬å…·æœ‰ä¸€å®šçš„å®¹é”™æ€§ï¼Œå³å…è®¸å¯¹åŒä¸€æ–‡ä»¶å¤¹å¤šæ¬¡æ“ä½œè€Œä¸å‘ç”Ÿå†²çª
+    ½«Ò»¸öÄ¿Â¼ÏÂËùÓĞÎÄ¼şÖĞµÄ'&quot'ºÍ'&nbsp;'É¾³ı
+    ¸ÃÄ¿Â¼ÏÂ´´½¨Ò»¸öĞÂÄ¿Â¼newdir
+    ĞÂÄ¿Â¼ÏÂfileNames.txt´´½¨Ò»¸öÎÄ±¾´æÈëËùÓĞµÄwordÎÄ¼şÃû
+    ±¾°æ±¾¾ßÓĞÒ»¶¨µÄÈİ´íĞÔ£¬¼´ÔÊĞí¶ÔÍ¬Ò»ÎÄ¼ş¼Ğ¶à´Î²Ù×÷¶ø²»·¢Éú³åÍ»
 """
 
 import sys
-sys.path.remove('/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python')
-sys.path.append('/Users/xujiaxing/anaconda/lib/python3.6/site-packages')
 import os
 import re
 import fnmatch
@@ -22,16 +20,16 @@ import fnmatch
 def Extract(aimpath):
 
     # print(aimpath)
-    # è¯¥ç›®å½•ä¸‹æ‰€æœ‰æ–‡ä»¶çš„åå­—
+    # ¸ÃÄ¿Â¼ÏÂËùÓĞÎÄ¼şµÄÃû×Ö
     files = os.listdir(aimpath)
-    # è¯¥ç›®ä¸‹åˆ›å»ºä¸€ä¸ªæ–°ç›®å½•newdirï¼Œç”¨æ¥æ”¾è½¬åŒ–åçš„txtæ–‡æœ¬
+    # ¸ÃÄ¿ÏÂ´´½¨Ò»¸öĞÂÄ¿Â¼newdir£¬ÓÃÀ´·Å×ª»¯ºóµÄtxtÎÄ±¾
     New_dir = os.path.abspath(os.path.join(aimpath, 'newdir'))
     if not os.path.exists(New_dir):
         os.mkdir(New_dir)
     # print(New_dir)
-    # åˆ›å»ºä¸€ä¸ªæ–‡æœ¬å­˜å…¥æ‰€æœ‰çš„wordæ–‡ä»¶å
-    fileNameSet = os.path.abspath(os.path.join(New_dir, 'fileNames.txt'))
-    o = open(fileNameSet, "w", encoding="utf-8")
+    # ´´½¨Ò»¸öÎÄ±¾´æÈëËùÓĞµÄwordÎÄ¼şÃû
+    fileNameSet = os.path.abspath(os.path.join(New_dir, 'filesName.txt'))
+    o = open(fileNameSet, "w")
     for filename in files:
         # try:
             print(filename)
@@ -39,23 +37,25 @@ def Extract(aimpath):
                 continue
             oldpath = os.path.abspath(os.path.join(aimpath, filename))
             newpath = os.path.join(os.path.join(aimpath, 'newdir'), filename)
-            print(oldpath)
+            print(newpath)
 
-            new_file = open(newpath, 'w', encoding="utf-8")
-            f1 = open(oldpath, 'r+', encoding="utf-8")
-            ans = f1.readline()
-            print(ans)
+            # new_file = open(newpath, 'a',encoding="gbk")
+            f1 = open(oldpath, 'r',encoding="gbk")
+            # ans = f1.readline()
+            # print(ans)
             for line in f1.readlines():
-                print(line)
-                date_tran1 = re.sub('(&quot)+', '')
-                line = line.replace(line, date_tran1)
-                date_tran2 = re.sub('(&nbsp;)+', '')
-                line = line.replace(line, date_tran2)
-                new_file.write(line)
-
-            new_file.close()
-            f1.close()
-            o.write(newpath + '\n')
+                # date_tran1 = re.sub('(&quot)+', '',line)
+                # line = line.replace(line, date_tran1)
+                # date_tran2 = re.sub('(&nbsp;)+', '',line)
+                # line = line.replace(line, date_tran2)
+                date_tran = re.sub('[£¬¡£][\u4e00-\u9fa5]*ÎŞ[\u4e00-\u9fa5]*[£¬¡£]', '', line)
+                #line = line.replace(line, date_tran)
+                print(date_tran)
+                # new_file.write(line)
+            #
+            # new_file.close()
+            # f1.close()
+            # o.write(newpath + '\n')
 
         # except:
         #     print('error')
@@ -64,5 +64,5 @@ def Extract(aimpath):
     o.close()
 
 if __name__ == '__main__':
-    Extract('../data/result')
+    Extract('../../data/result')
     print("done")

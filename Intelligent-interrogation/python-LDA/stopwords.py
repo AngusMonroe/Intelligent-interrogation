@@ -24,7 +24,8 @@ def stopword(inputpath, outputpath):
 
     infile = open(inputpath, 'r')
     outfile = open(outputpath, 'a')
-    stoplist = {}.fromkeys([line.strip() for line in open("../data/stopwords.txt")])
+    stoplist = {}.fromkeys([line.strip() for line in open("data/stopword.txt")])
+    print(stoplist)
     for line in infile:
         keys = [word for word in SplitStr(line) if word not in stoplist]  # 去停用词
         for key in keys:

@@ -12,6 +12,7 @@ from PyQt5.QtGui import QPalette,QPixmap,QFont
 from PyQt5.QtCore import Qt
 from mainwindow import *
 
+
 class Ui_Answer(QWidget):
     def setupUi(self, Answer, ans):
         Answer.setObjectName("Answer")
