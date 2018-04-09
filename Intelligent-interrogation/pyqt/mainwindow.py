@@ -68,15 +68,14 @@ class Ui_MainWindow(QWidget):
             print(cell_value)
             # print(ans[i][1])
 
-    def firstPyQt5_button_click(self):
-        self.ans = "您的建议用药有：\n"
-        txt1 = self.et_describe.toPlainText()
-        txt2 = self.et_ill.toPlainText()
-
+    def solve(self, txt1, txt2):
         if txt1:
             jieba.load_userdict("../../data/jibingICD.txt")
+            stoplist = {}.fromkeys([line.strip() for line in open("../python-LDA/data/stopword.txt")])
             txt_key = jieba.analyse.extract_tags(txt1, topK=2, withWeight=False)  # 从输入中提取关键词
             print(txt_key)
+            txt_key = [word for word in list(txt_key) if word not in stoplist]  # 去停用词
+
             model = word2vec.Word2Vec.load("../../data/ml.model")
             if len(txt_key)>1:  # 双关键词
                 print(model.similarity(txt_key[0], txt_key[1]))
@@ -135,7 +134,7 @@ class Ui_MainWindow(QWidget):
             #     self.show()
             print("test")
 
-        elif txt2:
+        if txt2:
             aim = match(txt2, 20, "../python-LDA/data/tmp100/model_twords.dat", 100)
             print(aim)
             # view = QWebEngineView()
@@ -149,6 +148,14 @@ class Ui_MainWindow(QWidget):
             web = webbrowser.get('chrome')
             web.open_new(aim)
 
+
+    def firstPyQt5_button_click(self):
+        self.ans = "您的建议用药有：\n"
+        txt1 = self.et_describe.toPlainText()
+        txt2 = self.et_ill.toPlainText()
+
+        if txt1 or txt2:
+            self.solve(txt1, txt2)
         else:
             print("error")
             self.on_help_mode_clicked()

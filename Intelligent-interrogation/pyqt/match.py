@@ -113,7 +113,7 @@ def match(text, key_num, factor_path, nkind):
     f2.close()
 
     # return aim
-    return "../../data/MedicalRecordFile/" + str(result[0]) + ".html"
+    return "file:///Users/xujiaxing/Documents/GitHub/Intelligent-interrogation/data/MedicalRecordFile/" + str(result[0]) + ".html"
 
 
 if __name__ == '__main__':

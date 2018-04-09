@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>INTELLIGENT INTERROGATION</title>
+	<link rel="stylesheet" type="text/css" href="css/normalize.css" />
+	<link rel="stylesheet" type="text/css" href="css/htmleaf-demo.css">
+	<style type="text/css">
+		* {
+		      margin: 0; padding: 0;
+		    }
+
+		    html, body {
+		      width: 100%;
+		      height: 100%;
+		      overflow: hidden;
+		    }
+
+		    #container {
+		      overflow: auto;
+		      position: absolute;
+		      top: 0; left: 0; 
+					right: 0; 
+					bottom: 0;
+		    }
+
+		    #background_video {
+		      position: absolute;
+
+		      top: 50%; left: 50%;
+		      transform: translate(-50%, -50%);
+
+		      object-fit: cover;
+		      height: 100%; width: 100%;
+		    }
+
+		    #video_cover {
+		      position: absolute;
+
+		      width: 100%; height: 100%;
+
+		      background: url('img/video_cover.jpg') no-repeat;
+		      background-size: cover;
+		      background-position: center;
+		    }
+
+		    #video_controls {
+		      position: absolute;
+		      left: 50%;
+		      transform: translate(-50%, 0);
+				}
+				
+				#top_space {
+					position: absolute;
+					top: 5%;
+		      left: 80%;
+					transform: translate(-50%, 0);
+					z-index: 3;
+				}
+
+				#bottom_space {
+					position: absolute;
+					bottom: 6%;
+		      left: 50%;
+					transform: translate(-50%, 0);
+					z-index: 3;
+				}
+				
+				#about_us {
+					background: url('img/about.png');
+					width: 60px;
+					height: 60px;
+					background-size: 60px,60px;
+				}
+				
+				#about_us:hover {
+					background: url('img/about_hover.png');
+					width: 60px;
+					height: 60px;
+					background-size: 60px,60px;
+					cursor: pointer;
+		    }
+
+		    #play img {
+		      width: 100px;
+		    }
+		    #pause img {
+		      width: 90px;
+		    }
+		    #pause {
+		      display: none;
+		    }
+
+		    @media (min-width: 768px) {
+		      #video_controls {
+		        display: none;
+		      }
+		    }
+
+		    /* Demo page specific styles */
+
+		    body {
+		      text-align: center;
+		      font-family: 'proxima-nova', Helvetica;
+		    }
+
+		    #container {
+		      height: 100%;
+		    }
+
+		    /* #overlay {
+		      position: absolute;
+		      top: 0; right: 0; left: 0; bottom: 0;
+		      background: rgba(0,0,0,0.5);
+		    } */
+
+		    #main_content {
+		      z-index: 2;
+		      position: relative;
+		      display: inline-block;
+
+		      /* Vertical center */
+		      top: 47%;
+		      transform: translateY(-50%);
+		    }
+
+				@media(max-height:400px) {
+					#main_content {
+						top: 10%;
+						transform: none;
+					}
+					#bottom_space {
+						position:relative;
+						top: 6%;
+						left: 50%;
+						transform: translate(-50%, 0);
+						z-index: 3;
+					}
+				}
+
+		    #main_content h1 {
+		      /* text-transform: uppercase; */
+		      font-weight: 600;
+		      font-family: DINNeuzeitGrotesk-BoldCond-Regular;
+		      color: #fff;
+		      font-size: 108px;
+		    }
+
+		    #main_content .sub_head {
+		      color: rgba(255,255,255,0.7);
+		      font-size: 18px;
+		    }
+				
+				@media (max-width: 800px){
+					#main_content h1 {
+						/* text-transform: uppercase; */
+						font-weight: 600;
+						font-family: DINNeuzeitGrotesk-BoldCond-Regular;
+						color: #fff;
+						font-size: 60px;
+					}
+
+					#main_content .sub_head {
+						color: rgba(255,255,255,0.7);
+						font-size: 12px;
+					}
+				}
+
+		    #main_content .info {
+		      color: rgba(255,255,255,0.5);
+		      font-size: 12px;
+		      margin-top: 10px;
+		    }
+				
+				.sizable_space {
+					flex: 1,1;
+					width: 40px;
+				}
+
+				#input_layout {
+					display: -webkit-box; 
+					display: -moz-box; 
+					display:-webkit-flex;
+					display: -ms-flexbox;
+					display:flex;
+					width: 100%;
+					height: 42px;
+					flex-direction:row;
+					justify-content:space-around;
+				}
+
+				@media (max-width: 800px){
+					#input_layout {
+						flex-direction:column;
+					}
+				}
+
+				#text_file {
+					flex-grow: 1;
+				}
+				
+				#layout_text {
+					width: 90%;
+				}
+
+				#input_text {
+					border:0;  
+					background:rgba(255,255,255,0);  
+					resize:none;
+					outline: none;
+					/*scrollbar-arrow-color:yellow;  
+					scrollbar-base-color:lightsalmon;  
+					overflow: hidden;*/  
+					overflow: hidden;
+					color: #29385F;  
+					height: 41px;
+					width:100%;
+					line-height: 41px;
+				}
+				
+				#layout_file {
+					background: url('img/file.png') no-repeat;
+					background-position: center;
+					background-size: 30px,30px;
+					width: 10%;
+					height: auto;
+				}
+
+				#layout_file:hover {
+					background: url('img/file_hover.png') no-repeat;
+					background-size: 30px,30px;
+					background-position: center;
+					cursor: pointer;
+				}
+
+				#input_file {
+					opacity: 0;
+					width: 42px;
+					height: 42px;
+				}
+
+				#input_file:hover {
+					cursor: pointer;
+				}
+				
+				#layout_confirm {
+					z-index: 4;
+					height: 42px;
+				}
+				
+				#confirm_button {
+					background: #29385F;
+					height: 42px;
+					width: 80px;
+					border: none;
+					font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+					color: #fff;
+				}
+				#confirm_button:hover {
+					background:#4E5F89;
+				}
+
+				#file_name {
+					color: #fff;
+					height: 20px;
+					font-size: 20px;
+				}
+
+		    #links {
+		      margin-top: 50px;
+		    }
+
+		    #links a {
+		      border: 2px solid rgba(255,255,255,0.20);
+		      border-radius: 61px;
+		      font-size: 12px;
+		      color: #FFFFFF;
+		      letter-spacing: 1px;
+		      text-decoration: none;
+		      text-transform: uppercase;
+		      padding: 10px 25px;
+		      display: inline-block;
+		      margin-right: 15px;
+		    }
+
+		    #footer {
+		      position: absolute;
+		      bottom: 0; left: 0; right: 0;
+		    }
+		    #footer a {
+		      color: rgba(255,255,255,0.5);
+		      text-decoration: none;
+		      margin: 10px;
+		      font-size: 12px;
+		    }
+		    #footer a:first-child {
+		      float: left;
+		    }
+		    #footer a:last-child {
+		      float: right;
+		    }
+	</style>
+</head>
+<body>
+	<div id="top_space"><div id="about_us"></div></div>
+	<div id="container">
+	    <video id="background_video" loop muted></video>
+	    <div id="video_cover"></div>
+	    <!-- <div id="overlay"></div> -->
+
+	    <!-- <div id="video_controls">
+	      <span id="play">
+	        <img src="play.png">
+	      </span>
+	      <span id="pause">
+	        <img src="pause.png">
+	      </span>
+	    </div> -->
+			
+	    <section id="main_content">
+	      <div id="head">
+	        <h1>INTELLIGENT<br>INTERROGATION</h1>
+					<p class="sub_head">Using word2vec model and LDA model to recommend medications for users.</p>
+					<div style="height:60px"></div>
+				</div>
+				<div id="input_layout">
+					<div class="sizable_space"></div>
+
+					<div id="text_file" style="background:rgba(255,255,255,0.3)">
+						<div id="layout_text" style="float:left">
+							<textarea id="input_text" placeholder="症状" wrap="off"></textarea>
+						</div>
+						<div id="layout_file" style="float:right">
+							<input id="input_file" type="file" onchange="showFileName()">
+						</div>
+					</div>
+
+					<script type="text/javascript">
+						function showFileName(){
+							var string=document.getElementById('input_file').value.replace(/^.+?\\([^\\]+?)(\.[^\.\\]*?)?$/gi,"$1");
+							if(string.length>0){
+								document.getElementById('file_name').textContent="file: "+string;
+							}
+							else{
+								document.getElementById('file_name').textContent=null;
+							}
+						}
+					</script>
+
+					<div class="sizable_space"></div>
+
+					<div id="layout_confirm" style="float:left">
+						<button id="confirm_button">确定</button>
+					</div>
+
+					<div class="sizable_space"></div>
+				</div>
+				<p id="file_name"></p>
+			</section>
+			<div id="bottom_space">© All rights reserved</div>
+	  </div>
+	<script src="bideo.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
