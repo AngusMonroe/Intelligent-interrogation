@@ -1,6 +1,8 @@
 # Intelligent-interrogation
 This is an app to give drug advise to user based on his symptom.
 
+![屏幕快照 2018-06-01 上午9.13.29.png](https://i.loli.net/2018/06/01/5b109de99a546.png)
+
 
 ### Directory Introduction
 - **Intelligent-interrogation** directory contains python code and C++ code about the project demo.
@@ -29,3 +31,15 @@ The main function of the project is as follows:
 - python 3.6
 - Navicat for SQL Sever
 - urllib, urllib2, json, pymssql, word2vec, Levenshtein, jieba, jieba.analyse, xlrd, xlwt, django
+
+
+### Usage
+
+1. run http sever
+	
+	```
+	cd Intelligent-interrogation/Intelligent-interrogation/IISever
+	python manage.py runserver
+	```
+	
+2. Open `http://127.0.0.1:8000/` in browser
