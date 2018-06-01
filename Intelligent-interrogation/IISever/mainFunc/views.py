@@ -1,5 +1,7 @@
 #coding:utf-8
-import webbrowser
+
+__author__ = 'XJX'
+__date__ = '2018.06.01'
 
 import Levenshtein
 import jieba

@@ -1,5 +1,5 @@
 # Intelligent-interrogation
-This is an app to give drug advise to user based on his symptom.
+This is an web app to give drug advise to user based on his symptom.
 
 ![屏幕快照 2018-06-01 上午9.13.29.png](https://i.loli.net/2018/06/01/5b109de99a546.png)
 
@@ -16,7 +16,7 @@ This is an app to give drug advise to user based on his symptom.
 
 The main function of the project is as follows:
 
-- use 'jieba' to divide words
+- use jieba to divide words
 - use TF-IDF to extract keywords
 - use Word2vec to build model
 - use Levenshtein to searching targets
@@ -25,6 +25,7 @@ The main function of the project is as follows:
 - use SQL Sever
 - use django framework
 
+![framework](framework.JPG)
 
 
 ### Requirements
