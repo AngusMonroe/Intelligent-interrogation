@@ -17,6 +17,10 @@ from gensim.models import word2vec
 
 
 def matchKeyWords(path, keys, keysWeight, colsWeight, ansNum):
+    """
+        description:
+            从Excel中获取药品信息
+    """
     # 读取excel中相关信息
     data = xlrd.open_workbook(path)
     sheet1 = data.sheet_by_name('sheet1')
@@ -116,6 +120,10 @@ def solve(txt1):
 
 # 1.待比较文本 2.某一类共有多少关键词 3.比较关键词路径 4.共有多少类
 def match(text, key_num, factor_path, nkind):
+    """
+        description:
+            将导入病例归类
+    """
     txt_key = text_to_words(text, key_num)
     value = []
     for kind in range(nkind):
@@ -149,6 +157,10 @@ def match(text, key_num, factor_path, nkind):
 
 
 def text_to_words(text, key_num):
+    """
+        description:
+            提取关键词
+    """
     stoplist = {}.fromkeys([line.strip() for line in open("../python-LDA/data/stopword.txt")])
 
     txt_key = jieba.analyse.extract_tags(text, key_num, withWeight=False)  # 从输入中提取关键词
@@ -221,6 +233,10 @@ def load2(factor_path, kind, key_num):
 
 @csrf_exempt
 def main_text(request):
+    """
+    description:
+        处理输入症状
+    """
     if(request.method=="POST"):
         data=request.POST.get('string')  # data为输入的字符串
         # 接口
@@ -236,6 +252,10 @@ def main_text(request):
 
 @csrf_exempt
 def main_file(request):
+    """
+        description:
+            处理导入病例
+    """
     file = request.FILES.get('file')
     if file:  # 处理附件上传到方法
         txt = file.read().decode()
