@@ -258,27 +258,28 @@ def main_file(request):
     """
     file = request.FILES.get('file')
     if file:  # 处理附件上传到方法
-        txt = file.read().decode()
-        txt = txt.replace('&nbsp;', '')
-        linkre = re.findall("<span style=\"font-family: 宋体; font-size: 16px;font-weight: bold;\">主诉：</span>(\s*)<span style=\"font-family: 宋体; font-size: 16px;\">(\S+)</span>", txt)  # 匹配目标标题
-        if not linkre:
-            print('23333')
-        aim = ''
-        if linkre:
-            print(linkre)
-            word = linkre[0][1]
-            word = word.replace('<span style="font-family: 宋体; font-size: 16px;font-weight: bold;">主诉：</span>', '')
-            word = word.replace('<span style ="font-family: 宋体; font-size: 16px;">', '')
-            word = word.replace('</span>', '')
-
-            if word:
-                aim = match(word, 20, "../python-LDA/data/tmp100/model_twords.dat", 100)
-                print(aim)
-
         # 接口 file为输入文件(非路径)
         result = 'X-0.html'
-        if aim:
-            result = aim
+        if file.name != '匹配病例.html':
+            txt = file.read().decode()
+            txt = txt.replace('&nbsp;', '')
+            linkre = re.findall("<span style=\"font-family: 宋体; font-size: 16px;font-weight: bold;\">主诉：</span>(\s*)<span style=\"font-family: 宋体; font-size: 16px;\">(\S+)</span>", txt)  # 匹配目标标题
+            if not linkre:
+                print('23333')
+            aim = ''
+            if linkre:
+                print(linkre)
+                word = linkre[0][1]
+                word = word.replace('<span style="font-family: 宋体; font-size: 16px;font-weight: bold;">主诉：</span>', '')
+                word = word.replace('<span style ="font-family: 宋体; font-size: 16px;">', '')
+                word = word.replace('</span>', '')
+
+                if word:
+                    aim = match(word, 20, "../python-LDA/data/tmp100/model_twords.dat", 100)
+                    print(aim)
+
+            if aim:
+                result = aim
         return HttpResponse(
             json.dumps({
                 "status": 1,
